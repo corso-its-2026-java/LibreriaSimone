@@ -16,13 +16,25 @@ public class LibreriaController {
 
     @GetMapping("/elenco")
     public List<Libreria> getAll() {
-
-        return libreriaService.getAll();
+        if (libreriaService.getAll().isEmpty()) {
+            System.out.println("Lista vuota!");
+        }
+            return libreriaService.getAll();
     }
 
     @PostMapping("/salva-libro")
     public String create(@RequestBody Libreria libreria) {
 
         return libreriaService.create(libreria);
+    }
+
+    @GetMapping("/elimina-libro/{id}")
+    public String cancella (@PathVariable int id) {
+        return  libreriaService.cancella(id);
+    }
+
+    @GetMapping("/cerca-libro/{id}")
+    public String cerca (@PathVariable int id) {
+        return  libreriaService.cerca(id);
     }
 }

@@ -30,8 +30,14 @@ public class LibreriaServiceImpl implements LibreriaService {
 
     @Override
     public List<Libreria> getAll() {
+
+        if (librerie.isEmpty()) {
+            System.out.println("Libreria vuota");
+        }
         return librerie;
     }
+
+
 
     @Override
     public String create(Libreria libreria) {
@@ -43,7 +49,6 @@ public class LibreriaServiceImpl implements LibreriaService {
                 }
             }
 
-
             if (libreria.getAutore() != null && libreria.getTitolo() != null && libreria.getId() > 0 && libreria.getCodice() > 0) {
                 librerie.add(libreria);
                 return "Libro registrato con successo!";
@@ -53,6 +58,29 @@ public class LibreriaServiceImpl implements LibreriaService {
         } else {
             return "Impossibile registrare il libro!";
         }
+    }
+
+    @Override
+    public String cancella(int id) {
+
+        for (Libreria libroLista : librerie) {
+            if (libroLista.getId() == id) {
+                librerie.remove(libroLista);
+                return "Libro eliminato!";
+            }
+        }
+        return "Nessun libro trovato con id :" + id;
+    }
+
+    @Override
+    public String cerca(int id) {
+
+        for (Libreria libroLista : librerie) {
+            if (libroLista.getId() == id) {
+                return "Libro Trovato con Titolo : " + libroLista.getTitolo() + ", Autore : " + libroLista.getAutore() + ", Codice : " + libroLista.getCodice();
+            }
+        }
+        return "Nessun libro trovato con id :" + id;
     }
 }
 

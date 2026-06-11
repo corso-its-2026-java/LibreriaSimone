@@ -9,4 +9,7 @@ public interface LibreriaService {
 
     String create(Libreria libreria);
 
+    String cancella(int id);
+
+    String cerca(int id);
 }
